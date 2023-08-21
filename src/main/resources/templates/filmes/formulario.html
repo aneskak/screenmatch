@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+
+<head>
+    <title>Cadastro de filme</title>
+</head>
+<body>
+<div layout:fragment="conteudo" class="rounded border border-2 m-5 p-5">
+
+    <form method="post" class="row g-3" action="/filmes">
+
+        <h2>Cadastro de filme</h2>
+
+        <input type="hidden" name="_method" value="put" th:if="${filme != null}">
+        <input type="hidden" name="id" th:value="${filme?.id}">
+
+        <div class="col-12">
+            <label for="nome" class="form-label">Nome:</label>
+            <input id="nome" name="nome" class="form-control" th:value="${filme?.nome}">
+        </div>
+
+        <div class="col-12">
+            <label for="duracao" class="form-label">Duração (em minutos):</label>
+            <input id="duracao" name="duracao" class="form-control" th:value="${filme?.duracaoEmMinutos}">
+        </div>
+
+        <div class="col-12">
+            <label for="ano" class="form-label">Ano de lançamento:</label>
+            <input id="ano" name="ano" class="form-control" th:value="${filme?.anoLancamento}">
+        </div>
+
+        <div class="col-12">
+            <label for="genero" class="form-label">Gênero:</label>
+            <input id="genero" name="genero" class="form-control" th:value="${filme?.genero}">
+        </div>
+        <div class="col-12">
+            <input class="btn btn-success" type="submit" value="Cadastrar">
+        </div>
+
+    </form>
+</div>
+</body>
+</html>

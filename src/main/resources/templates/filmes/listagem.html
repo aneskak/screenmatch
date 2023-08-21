@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <title>Lista de filmes</title>
+</head>
+<body>
+
+<div layout:fragment="conteudo" class="rounded border border-2 m-5 p-5">
+    <h2>Lista de filmes <a class="btn btn-success" href="/filmes/formulario">Novo</a></h2>
+
+    <table class="table">
+        <thead class="table-light">
+        <tr>
+            <th>NOME</th>
+            <th>DURAÇÃO</th>
+            <th>ANO LANÇAMENTO</th>
+            <th>GÊNERO</th>
+            <th>AÇÕES</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="filme : ${lista}">
+            <td th:text="${filme.nome}"></td>
+            <td th:text="${filme.duracaoEmMinutos}"></td>
+            <td th:text="${filme.anoLancamento}"></td>
+            <td th:text="${filme.genero}"></td>
+            <td>
+                <div class="row">
+                    <div class="col-3">
+                        <a class="btn btn-primary" th:href="@{/filmes/formulario?id={id}(id=${filme.id})}">Editar</a>
+                    </div>
+                    <div class="col-3">
+                        <form action="/filmes" method="post">
+                            <input type="hidden" name="_method" value="delete">
+                            <input type="hidden" name="id" th:value="${filme.id}">
+                            <input class="btn btn-danger" type="submit" value="Excluir">
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
